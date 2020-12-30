@@ -1,2 +1,5 @@
 <!--index.wxml-->
-<view>fuck 疫情通</view>
+<view>
+  <input type="text" bindinput="handleAccountInput" placeholder="学号/工号" value="{{inputAccount}}" />
+  <input type="text" password bindinput="handlePasswordInput" placeholder="密码" value="{{inputPassword}}" />
+</view>

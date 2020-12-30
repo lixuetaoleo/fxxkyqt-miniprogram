@@ -3,7 +3,8 @@ const app = getApp()
 
 Page({
   data: {
-
+    inputAccount: "",
+    inputPassword: ""
   },
 
   onLoad: function () {},
@@ -21,5 +22,19 @@ Page({
   doUpload: function () {
 
   },
+
+  handleAccountInput(e) {
+    console.log(e.detail.value);
+    this.setData({
+      inputAccount: e.detail.value
+    });
+  },
+
+  handlePasswordInput(e) {
+    console.log(e.detail.value);
+    this.setData({
+      inputPassword: e.detail.value
+    });
+  }
 
 })
