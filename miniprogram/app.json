@@ -1,13 +1,30 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/home/index",
+    "pages/yqt/index",
+    "pages/cwj/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "疫情通一键打卡助手",
+    "navigationBarTitleText": "一键打卡助手",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [{
+        "text": "个人中心",
+        "pagePath": "pages/home/index"
+      },
+      {
+        "text": "疫情通",
+        "pagePath": "pages/yqt/index"
+      },
+      {
+        "text": "晨午检",
+        "pagePath": "pages/cwj/index"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"

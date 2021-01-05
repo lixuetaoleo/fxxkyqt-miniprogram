@@ -1,5 +1,14 @@
 <!--index.wxml-->
-<view>
+<view wx:if="{{hasSavedUNandPW}}">
   <input type="text" bindinput="handleAccountInput" placeholder="学号/工号" value="{{inputAccount}}" />
   <input type="text" password bindinput="handlePasswordInput" placeholder="密码" value="{{inputPassword}}" />
+  <button bindtap="handleSaveUserInfo">保存信息</button>
+</view>
+<view wx:else>
+  <text>
+    {{username}}
+  </text>
+  <text>
+    {{password}}
+  </text>
 </view>
