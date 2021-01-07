@@ -5,33 +5,27 @@ Page({
   data: {
     inputAccount: "",
     inputPassword: "",
-    username: app.globalData.username,
-    password: app.globalData.password,
-    hasSavedUNandPW: app.globalData.username.length > 0 && app.globalData.password.length > 0
+    username: "",
+    password: "",
+    isShowInput: true
   },
 
   onLoad: function () {
-    wx.getStorage({
+    Promise.all([wx.getStorage({
       key: 'username'
-    }).then((res)=>{
-      this.setData({
-        username: res.data
-      })
-    }).catch((err)=>{
-      console.log(err)
-    });
-
-    wx.getStorage({
+    }), wx.getStorage({
       key: 'password'
-    }).then((res)=>{
+    })]).then((res) => {
+      console.log(res);
       this.setData({
-        password: res.data
-      })
-    }).catch((err)=>{
-      console.log(err)
+        username: res[0].data,
+        inputAccount: res[0].data,
+        password: res[1].data,
+        inputPassword: res[1].data,
+        isShowInput: (res[0].data.length === 0) && (res[1].data.length === 0)
+      });
     });
   },
-
 
   onGetUserInfo: function (e) {
 
