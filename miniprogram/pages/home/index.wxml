@@ -1,14 +1,26 @@
 <!--index.wxml-->
-<view wx:if="{{hasSavedUNandPW}}">
-  <input type="text" bindinput="handleAccountInput" placeholder="学号/工号" value="{{inputAccount}}" />
-  <input type="text" password bindinput="handlePasswordInput" placeholder="密码" value="{{inputPassword}}" />
-  <button bindtap="handleSaveUserInfo">保存信息</button>
+<view>
+  <view wx:if="{{isShowInput}}">
+    <input type="text" bindinput="handleAccountInput" placeholder="学号/工号" value="{{inputAccount}}" />
+    <input type="text" password bindinput="handlePasswordInput" placeholder="密码" value="{{inputPassword}}" />
+    <button bindtap="handleSaveUserInfo">保存信息</button>
+  </view>
+  <view wx:else>
+    当前登录账号为:
+    <text>
+      {{username}}
+    </text>
+    <button bindtap="handleChangeAccount">切换账号</button>
+  </view>
 </view>
-<view wx:else>
-  <text>
-    {{username}}
-  </text>
-  <text>
-    {{password}}
-  </text>
+<view>
+  <text>你想在哪里打卡</text>
+  <view>
+    <radio-group bindchange="handleAddrChange">
+      <radio value="school" checked="true">
+        学校
+      </radio>
+      <radio value="home">家里</radio>
+    </radio-group>
+  </view>
 </view>

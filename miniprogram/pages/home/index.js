@@ -66,15 +66,35 @@ Page({
         icon: 'none',
         title: '账号密码不能为空, 请检查输入'
       })
+      return;
     }
     wx.setStorage({
-      data: this.data.inputAccount,
-      key: 'username',
-    });
-    wx.setStorage({
-      data: this.data.inputPassword,
-      key: 'password',
-    })
+        data: this.data.inputAccount,
+        key: 'username',
+      })
+      .then(() => {
+        wx.setStorage({
+            data: this.data.inputPassword,
+            key: 'password',
+          })
+          .then(() => {
+            this.setData({
+              username: this.data.inputAccount,
+              password: this.data.inputPassword,
+              isShowInput: false
+            })
+          });
+      });
     console.log(this.data.inputAccount, this.data.inputPassword);
+  },
+
+  handleChangeAccount() {
+    this.setData({
+      isShowInput: true
+    });
+  },
+
+  handleAddrChange(e) {
+    console.log(e.detail.value);
   }
 })
