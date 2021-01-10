@@ -1,1 +1,2 @@
 /* pages/home/index.wxss */
+@import "../../app.wxss";
