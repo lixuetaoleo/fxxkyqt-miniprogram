@@ -1,2 +1,4 @@
-<!--pages/cwj/index.wxml-->
-<text>pages/cwj/index.wxml</text>
+<view>
+  <text>晨午检一键打卡</text>
+  <button bindtap="testdaka">test</button>
+</view>
