@@ -1,8 +1,8 @@
 //app.js
 App({
   globalData: {
-    username: "",
-    password: ""
+    username: '',
+    password: '',
   },
   onLaunch: function () {
     if (!wx.cloud) {
@@ -17,5 +17,17 @@ App({
         traceUser: true,
       })
     }
+    Promise.all([wx.getStorage({
+      key: 'username',
+    }),wx.getStorage({
+      key: 'password',
+    }),wx.getStorage({
+      key: 'isAtSchool',
+    })]).then((res)=>{
+      console.log(res);
+      this.globalData.username = res[0].data;
+      this.globalData.password = res[1].data;
+      this.globalData.isAtSchool = res[2].data;
+    }).catch((err)=>{console.log(err)});
   }
 })

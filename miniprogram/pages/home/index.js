@@ -7,23 +7,18 @@ Page({
     inputPassword: "",
     username: "",
     password: "",
-    isShowInput: true
+    isShowInput: true,
+    isAtSchool: true,
   },
 
-  onLoad: function () {
-    Promise.all([wx.getStorage({
-      key: 'username'
-    }), wx.getStorage({
-      key: 'password'
-    })]).then((res) => {
-      console.log(res);
-      this.setData({
-        username: res[0].data,
-        inputAccount: res[0].data,
-        password: res[1].data,
-        inputPassword: res[1].data,
-        isShowInput: (res[0].data.length === 0) && (res[1].data.length === 0)
-      });
+  onReady: function () {
+    this.setData({
+      username: app.globalData.username,
+      inputAccount: app.globalData.username,
+      password: app.globalData.password,
+      inputPassword: app.globalData.password,
+      isShowInput: (app.globalData.username.length === 0) && (app.globalData.password.length === 0),
+      isAtSchool: app.globalData.isAtSchool
     });
   },
 
@@ -32,11 +27,6 @@ Page({
   },
 
   onGetOpenid: function () {
-
-  },
-
-  // 上传图片
-  doUpload: function () {
 
   },
 
@@ -62,23 +52,19 @@ Page({
       })
       return;
     }
-    wx.setStorage({
-        data: this.data.inputAccount,
-        key: 'username',
+    Promise.all([wx.setStorage({
+      data: this.data.inputAccount,
+      key: 'username',
+    }), wx.setStorage({
+      data: this.data.inputPassword,
+      key: 'password',
+    })]).then(() => {
+      this.setData({
+        username: this.data.inputAccount,
+        password: this.data.inputPassword,
+        isShowInput: false
       })
-      .then(() => {
-        wx.setStorage({
-            data: this.data.inputPassword,
-            key: 'password',
-          })
-          .then(() => {
-            this.setData({
-              username: this.data.inputAccount,
-              password: this.data.inputPassword,
-              isShowInput: false
-            })
-          });
-      });
+    });
     console.log(this.data.inputAccount, this.data.inputPassword);
   },
 
@@ -89,6 +75,13 @@ Page({
   },
 
   handleAddrChange(e) {
-    console.log(e.detail.value);
+    console.log(e.detail.value === 'school');
+    wx.setStorage({
+      data: e.detail.value === 'school',
+      key: 'isAtSchool',
+    });
+    this.setData({
+      isAtSchool: e.detail.value === 'school'
+    });
   }
 })

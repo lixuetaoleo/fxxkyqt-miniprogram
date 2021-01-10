@@ -6,7 +6,7 @@
     <button bindtap="handleSaveUserInfo">保存信息</button>
   </view>
   <view wx:else>
-    当前登录账号为:
+    <text>当前登录账号为:</text>
     <text>
       {{username}}
     </text>
@@ -17,10 +17,13 @@
   <text>你想在哪里打卡</text>
   <view>
     <radio-group bindchange="handleAddrChange">
-      <radio value="school" checked="true">
-        学校
+      <radio value="school" checked="{{isAtSchool}}">
+        学校(北校区)
       </radio>
-      <radio value="home">家里</radio>
+      <radio value="home" checked="{{!isAtSchool}}">家里</radio>
     </radio-group>
+    <text>
+      疫情通和晨午检都将按照此地址进行打卡
+    </text>
   </view>
 </view>
