@@ -1,8 +1,13 @@
 //index.js
 const app = getApp();
 
+const addressReg = /.+?(省|市|自治区|自治州|县|区|街道|路|号)/g;
 const storagedUsername = wx.getStorageSync('username');
 const storagedPassword = wx.getStorageSync('password');
+
+function splitAddressString(address) {
+  return address.length > 0 ? address.match(addressReg) : [];
+}
 
 Page({
   data: {
@@ -12,6 +17,16 @@ Page({
     password: storagedPassword,
     isShowInput: (storagedUsername.length === 0) && (storagedPassword.length === 0) && true,
     isAtSchool: wx.getStorageSync('isAtSchool'),
+    homeAddress: {
+      latitude: 1.0,
+      longitude: 1.0,
+      province: '',
+      city: '',
+      district: '',
+      township: '',
+      street: '',
+      streetNumber: ''
+    }
   },
 
   onGetUserInfo: function (e) {
@@ -74,6 +89,24 @@ Page({
     });
     this.setData({
       isAtSchool: isAtSchool
+    });
+    wx.chooseLocation().then((res,err)=>{
+      console.log(res);
+      const splittedAddress = splitAddressString(res.address);
+      console.log(splittedAddress);
+      this.setData({
+        homeAddress: {
+          latitude: res.latitude,
+          longitude: res.longitude,
+          province: splittedAddress[0],
+          city: splittedAddress[1],
+          district: splittedAddress[2],
+          township: splittedAddress[3],
+          street: splittedAddress[4],
+          streetNumber: splittedAddress[5],
+        }
+      }, ()=>{console.log(this.data.homeAddress)});
+
     });
   }
 })

@@ -22,6 +22,8 @@
       </radio>
       <radio value="home" checked="{{isAtSchool === false ? true : ''}}">家里</radio>
     </radio-group>
+    <button wx:if="{{isAtSchool === false}}" bindtap="handleSetHomeAddress">设置地址</button>
+    <text wx:if="{{isAtSchool === false}}">你设置的家庭地址为:{{homeAddress.province}}{{homeAddress.city}}{{homeAddress.district}}{{homeAddress.township}}{{homeAddress.street}}{{homeAddress.streetNumber}}(如果地址为空, 请重新获取地址)</text>
     <text>
       疫情通和晨午检都将按照此地址进行打卡
     </text>
