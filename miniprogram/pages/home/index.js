@@ -1,25 +1,17 @@
 //index.js
 const app = getApp();
 
+const storagedUsername = wx.getStorageSync('username');
+const storagedPassword = wx.getStorageSync('password');
+
 Page({
   data: {
-    inputAccount: "",
-    inputPassword: "",
-    username: "",
-    password: "",
-    isShowInput: true,
-    isAtSchool: true,
-  },
-
-  onReady: function () {
-    this.setData({
-      username: app.globalData.username,
-      inputAccount: app.globalData.username,
-      password: app.globalData.password,
-      inputPassword: app.globalData.password,
-      isShowInput: (app.globalData.username.length === 0) && (app.globalData.password.length === 0),
-      isAtSchool: app.globalData.isAtSchool
-    });
+    inputAccount: storagedUsername,
+    inputPassword: storagedPassword,
+    username: storagedUsername,
+    password: storagedPassword,
+    isShowInput: (storagedUsername.length === 0) && (storagedPassword.length === 0) && true,
+    isAtSchool: wx.getStorageSync('isAtSchool'),
   },
 
   onGetUserInfo: function (e) {
@@ -62,7 +54,7 @@ Page({
       this.setData({
         username: this.data.inputAccount,
         password: this.data.inputPassword,
-        isShowInput: false
+        isShowInput: false,
       })
     });
     console.log(this.data.inputAccount, this.data.inputPassword);
@@ -75,13 +67,13 @@ Page({
   },
 
   handleAddrChange(e) {
-    console.log(e.detail.value === 'school');
+    const isAtSchool = e.detail.value === 'school';
     wx.setStorage({
-      data: e.detail.value === 'school',
+      data: isAtSchool,
       key: 'isAtSchool',
     });
     this.setData({
-      isAtSchool: e.detail.value === 'school'
+      isAtSchool: isAtSchool
     });
   }
 })

@@ -17,10 +17,10 @@
   <text>你想在哪里打卡</text>
   <view>
     <radio-group bindchange="handleAddrChange">
-      <radio value="school" checked="{{isAtSchool}}">
+      <radio value="school" checked="{{isAtSchool === true ? true : ''}}">
         学校(北校区)
       </radio>
-      <radio value="home" checked="{{!isAtSchool}}">家里</radio>
+      <radio value="home" checked="{{isAtSchool === false ? true : ''}}">家里</radio>
     </radio-group>
     <text>
       疫情通和晨午检都将按照此地址进行打卡
