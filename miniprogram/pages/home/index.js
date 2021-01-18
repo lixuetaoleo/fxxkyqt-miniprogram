@@ -1,7 +1,7 @@
 //index.js
 const app = getApp();
 
-const addressReg = /.+?(省|市|自治区|自治州|县|区|街道|路|号)/g;
+const addressReg = /.+?(省|市|自治区|自治州|县|区|路|号)/g;
 const storagedUsername = wx.getStorageSync('username');
 const storagedPassword = wx.getStorageSync('password');
 
@@ -26,7 +26,8 @@ Page({
       township: '',
       street: '',
       streetNumber: ''
-    }
+    },
+    completedAddress: []
   },
 
   onGetUserInfo: function (e) {
@@ -94,19 +95,34 @@ Page({
       console.log(res);
       const splittedAddress = splitAddressString(res.address);
       console.log(splittedAddress);
-      this.setData({
-        homeAddress: {
+      wx.setStorage({
+        data: {
           latitude: res.latitude,
           longitude: res.longitude,
           province: splittedAddress[0],
           city: splittedAddress[1],
           district: splittedAddress[2],
-          township: splittedAddress[3],
-          street: splittedAddress[4],
-          streetNumber: splittedAddress[5],
-        }
-      }, ()=>{console.log(this.data.homeAddress)});
-
+          street: splittedAddress[3],
+          streetNumber: splittedAddress[4],
+          completedAddress: res.address + res.name
+        },
+        key: 'homeAddress',
+      }).then(() => {
+        this.setData({
+          homeAddress: {
+            latitude: res.latitude,
+            longitude: res.longitude,
+            province: splittedAddress[0],
+            city: splittedAddress[1],
+            district: splittedAddress[2],
+            street: splittedAddress[3],
+            streetNumber: splittedAddress[4],
+          },
+          completedAddress: splittedAddress
+        }, () => {
+          console.log(this.data.homeAddress)
+        });
+      });
     });
   }
 })
