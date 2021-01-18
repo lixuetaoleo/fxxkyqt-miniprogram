@@ -27,7 +27,9 @@ Page({
       street: '',
       streetNumber: ''
     },
-    completedAddress: []
+    completedAddress: wx.getStorageSync('homeAddress').completedAddress,
+    showImportantInfo: false,
+    oneButton: [{text: '我知道了'}],
   },
 
   onGetUserInfo: function (e) {
@@ -123,6 +125,18 @@ Page({
           console.log(this.data.homeAddress)
         });
       });
+    });
+  },
+
+  handleShowImportantInfo() {
+    this.setData({
+      showImportantInfo: true
+    });
+  },
+
+  handleDiglogIKnow(e) {
+    this.setData({
+      showImportantInfo: false
     });
   }
 })

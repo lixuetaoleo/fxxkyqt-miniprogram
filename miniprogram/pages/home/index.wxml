@@ -28,4 +28,15 @@
       疫情通和晨午检都将按照此地址进行打卡
     </text>
   </view>
+  <button bindtap="handleShowImportantInfo">
+    重要说明
+  </button>
+  <mp-dialog title="重要说明" show="{{showImportantInfo}}" buttons="{{oneButton}}" bindbuttontap="handleDiglogIKnow">
+        <view>本小程序仅供无特殊情况的你省去繁琐的打卡步骤</view>
+        <view>如果你有以下情况，请在学校官方渠道进行上报:</view>
+        <text>1. 有中、高风险或境外地区旅居史</text>
+        <text>2. 有相关症状出现</text>
+        <text>3. 健康码颜色非绿</text>
+        <text>4. 其他任何需要如实上报的信息</text>
+    </mp-dialog>
 </view>
