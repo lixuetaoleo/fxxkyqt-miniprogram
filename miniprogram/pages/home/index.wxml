@@ -1,42 +1,49 @@
 <!--index.wxml-->
 <view>
-  <view wx:if="{{isShowInput}}">
-    <input type="text" bindinput="handleAccountInput" placeholder="学号/工号" value="{{inputAccount}}" />
-    <input type="text" password bindinput="handlePasswordInput" placeholder="密码" value="{{inputPassword}}" />
-    <button bindtap="handleSaveUserInfo">保存信息</button>
-  </view>
-  <view wx:else>
-    <text>当前登录账号为:</text>
-    <text>
-      {{username}}
-    </text>
-    <button bindtap="handleChangeAccount">切换账号</button>
-  </view>
-</view>
-<view>
-  <text>你想在哪里打卡</text>
   <view>
-    <radio-group bindchange="handleAddrChange">
-      <radio value="school" checked="{{isAtSchool === true ? true : ''}}">
-        学校(北校区)
-      </radio>
-      <radio value="home" checked="{{isAtSchool === false ? true : ''}}">家里</radio>
-    </radio-group>
-    <button wx:if="{{isAtSchool === false}}" bindtap="handleSetHomeAddress">设置地址</button>
-    <text wx:if="{{isAtSchool === false}}">你设置的家庭地址为:{{homeAddress.province}}{{homeAddress.city}}{{homeAddress.district}}{{homeAddress.township}}{{homeAddress.street}}{{homeAddress.streetNumber}}(如果地址为空, 请重新获取地址)</text>
-    <text>
-      疫情通和晨午检都将按照此地址进行打卡
-    </text>
+    <view wx:if="{{isShowInput}}">
+      <input type="text" bindinput="handleAccountInput" placeholder="学号/工号" value="{{inputAccount}}" />
+      <input type="text" password bindinput="handlePasswordInput" placeholder="密码" value="{{inputPassword}}" />
+      <button class="weui-btn weui-btn_primary" bindtap="handleSaveUserInfo">保存信息</button>
+    </view>
+    <view wx:else>
+      <text>当前登录账号为:</text>
+      <text>
+        {{username}}
+      </text>
+      <button bindtap="handleChangeAccount">切换账号</button>
+    </view>
   </view>
-  <button bindtap="handleShowImportantInfo">
-    重要说明
-  </button>
-  <mp-dialog title="重要说明" show="{{showImportantInfo}}" buttons="{{oneButton}}" bindbuttontap="handleDiglogIKnow">
-        <view>本小程序仅供无特殊情况的你省去繁琐的打卡步骤</view>
-        <view>如果你有以下情况，请在学校官方渠道进行上报:</view>
-        <text>1. 有中、高风险或境外地区旅居史</text>
-        <text>2. 有相关症状出现</text>
-        <text>3. 健康码颜色非绿</text>
-        <text>4. 其他任何需要如实上报的信息</text>
+  <view>
+    <text>你想在哪里打卡</text>
+    <view>
+      <radio-group bindchange="handleAddrChange">
+        <radio value="school" checked="{{isAtSchool === true ? true : ''}}">
+          学校(北校区)
+        </radio>
+        <radio value="home" checked="{{isAtSchool === false ? true : ''}}">家里</radio>
+      </radio-group>
+      <button wx:if="{{isAtSchool === false}}" bindtap="handleSetHomeAddress"
+        class="weui-btn weui-btn_primary">设置地址</button>
+      <view wx:if="{{isAtSchool === false}}">
+        你设置的家庭地址为:
+        {{completedAddress}}
+        (如果地址为空, 请重新获取地址)</view>
+      <text>
+        疫情通和晨午检都将按照此地址进行打卡
+      </text>
+    </view>
+  </view>
+  <view>
+    <button bindtap="handleShowImportantInfo">
+      重要说明
+    </button>
+    <mp-dialog title="重要说明" show="{{showImportantInfo}}" buttons="{{oneButton}}" bindbuttontap="handleDiglogIKnow">
+      <view>本小程序仅供无特殊情况的你省去繁琐的打卡步骤。如果你有以下情况，请在学校官方渠道进行上报:</view>
+      <text>1. 有中、高风险或境外地区旅居史</text>
+      <text>2. 有相关症状出现</text>
+      <text>3. 健康码颜色非绿</text>
+      <text>4. 其他任何需要如实上报的信息</text>
     </mp-dialog>
+  </view>
 </view>

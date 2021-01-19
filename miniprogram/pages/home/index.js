@@ -93,7 +93,23 @@ Page({
     this.setData({
       isAtSchool: isAtSchool
     });
-    wx.chooseLocation().then((res,err)=>{
+  },
+
+  handleSetHomeAddress(e) {
+    // wx.getSetting({
+    //   success(res) {
+    //     if (!res.authSetting['scope.record']) {
+    //       wx.authorize({
+    //         scope: 'scope.record',
+    //         success () {
+    //           // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+    //           wx.startRecord()
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
+    wx.chooseLocation().then((res, err) => {
       console.log(res);
       const splittedAddress = splitAddressString(res.address);
       console.log(splittedAddress);
@@ -120,7 +136,7 @@ Page({
             street: splittedAddress[3],
             streetNumber: splittedAddress[4],
           },
-          completedAddress: splittedAddress
+          completedAddress: res.address + res.name
         }, () => {
           console.log(this.data.homeAddress)
         });
