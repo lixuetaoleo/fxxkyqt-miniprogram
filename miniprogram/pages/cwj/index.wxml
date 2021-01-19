@@ -1,4 +1,3 @@
 <view>
-  <text>晨午检一键打卡</text>
-  <button bindtap="testdaka">test</button>
+  <button disabled="{{!canSignIn}}" bindtap="testdaka">晨午检一键打卡</button>
 </view>

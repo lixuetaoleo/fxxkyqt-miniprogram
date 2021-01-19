@@ -1,5 +1,53 @@
 //index.js
 const app = getApp();
+
+const isAtSchool = wx.getStorageSync('isAtSchool');
+const homeAddress = wx.getStorageSync('homeAddress');
+const dataAtHome = {
+  sfzx: 0,
+  tw: 1,
+  area: `${homeAddress.province} ${homeAddress.city} ${homeAddress.district}`,
+  city: homeAddress.city,
+  province: homeAddress.province,
+  address: homeAddress.completedAddress,
+  geo_api_info: {
+    "type": "complete",
+    "info": "SUCCESS",
+    "status": 1,
+    "position": {
+      "Q": homeAddress.latitude,
+      "R": homeAddress.longitude,
+      "lng": homeAddress.longitude,
+      "lat": homeAddress.latitude
+    },
+    "message": "Get ipLocation success.Get address success.",
+    "location_type": "ip",
+    "accuracy": null,
+    "isConverted": true,
+    "addressComponent": {
+      "citycode": "",
+      "adcode": "",
+      "neighborhoodType": "",
+      "neighborhood": "",
+      "building": "",
+      "buildingType": "",
+      "street": homeAddress.street,
+      "streetNumber": "2号",
+      "country": "中国",
+      "province": homeAddress.province,
+      "city": homeAddress.city,
+      "district": homeAddress.district,
+    },
+    "formattedAddress": homeAddress.completedAddress,
+    "roads": [],
+    "crosses": [],
+    "pois": []
+  },
+  sfcyglq: 0,
+  sfyzz: 0,
+  qtqk: '',
+  ymtys: 0,
+};
 const dataAtSchool = {
   sfzx: 1,
   tw: 1,
@@ -60,22 +108,20 @@ const dataAtSchool = {
 Page({
   data: {
     cookies: "",
+    canSignIn: false,
   },
 
-  onLoad: function () {},
-
-
-  onGetUserInfo: function (e) {
-
-  },
-
-  onGetOpenid: function () {
-
+  onShow: function () {
+    this.setData({
+      canSignIn: (wx.getStorageSync('username').length) > 0,
+    });
   },
 
   testdaka() {
-    console.log('fdaf');
-    const that = this;
+    const submitData = isAtSchool ? dataAtSchool : dataAtHome;
+    const username = wx.getStorageSync('username');
+    const password = wx.getStorageSync('password');
+    console.log(submitData);
     wx.request({
       url: 'https://xxcapp.xidian.edu.cn/uc/wap/login/check',
       method: 'POST',
@@ -83,16 +129,18 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        username: '',
-        password: ''
+        username,
+        password,
       },
       enableCache: true,
       success(res) {
-        console.log(res);
-        // that.setData({
-        //   cookies: res.header['Set-Cookie']
-        // })
-        // console.log(that.data.cookies);
+        if (res.data.e !== 0) {
+          wx.showToast({
+            title: res.data.m,
+            icon: 'none'
+          });
+          return;
+        }
         wx.request({
           url: 'https://xxcapp.xidian.edu.cn/xisuncov/wap/open-report/save',
           method: 'POST',
@@ -100,9 +148,20 @@ Page({
             'cookie': res.header['Set-Cookie'],
             'content-type': 'application/x-www-form-urlencoded'
           },
-          data: that.data.submitData,
+          data: submitData,
           success(res) {
             console.log(res);
+            if (res.data.e === 0) {
+              wx.showToast({
+                title: '打卡成功!',
+                icon: 'success'
+              })
+            } else {
+              wx.showToast({
+                title: res.data.m,
+                icon: 'none'
+              });
+            }
           }
         })
       }
