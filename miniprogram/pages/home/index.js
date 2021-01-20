@@ -41,14 +41,14 @@ Page({
   },
 
   handleAccountInput(e) {
-    console.log(e.detail.value);
+    // console.log(e.detail.value);
     this.setData({
       inputAccount: e.detail.value
     });
   },
 
   handlePasswordInput(e) {
-    console.log(e.detail.value);
+    // console.log(e.detail.value);
     this.setData({
       inputPassword: e.detail.value
     });
@@ -75,7 +75,7 @@ Page({
         isShowInput: this.data.inputAccount.length === 0 ? true : false,
       })
     });
-    console.log(this.data.inputAccount, this.data.inputPassword);
+    // console.log(this.data.inputAccount, this.data.inputPassword);
   },
 
   handleChangeAccount() {
@@ -110,9 +110,9 @@ Page({
     //   }
     // })
     wx.chooseLocation().then((res, err) => {
-      console.log(res);
+      // console.log(res);
       const splittedAddress = splitAddressString(res.address);
-      console.log(splittedAddress);
+      // console.log(splittedAddress);
       wx.setStorage({
         data: {
           latitude: res.latitude,
@@ -138,7 +138,7 @@ Page({
           },
           completedAddress: res.address + res.name
         }, () => {
-          console.log(this.data.homeAddress)
+          // console.log(this.data.homeAddress)
         });
       });
     });

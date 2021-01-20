@@ -58,8 +58,8 @@ Page({
   signInCWJ() {
     const submitData = {};
     Object.assign(submitData, cwjData, this.data.isAtSchool ? app.globalData.commonDataAtSchool : app.globalData.commonDataAtHome);
-    console.log(this.data.isAtSchool);
-    console.log(submitData);
+    // console.log(this.data.isAtSchool);
+    // console.log(submitData);
     wx.request({
       url: 'https://xxcapp.xidian.edu.cn/uc/wap/login/check',
       method: 'POST',
@@ -88,7 +88,7 @@ Page({
           },
           data: submitData,
           success(res) {
-            console.log(res);
+            // console.log(res);
             if (res.data.e === 0) {
               wx.showToast({
                 title: '晨午检打卡成功!',
@@ -109,8 +109,8 @@ Page({
   signInYQT() {
     const submitData = {};
     Object.assign(submitData, yqtData, this.data.isAtSchool ? app.globalData.commonDataAtSchool : app.globalData.commonDataAtHome);
-    console.log(this.data.isAtSchool);
-    console.log(submitData);
+    // console.log(this.data.isAtSchool);
+    // console.log(submitData);
     wx.request({
       url: 'https://xxcapp.xidian.edu.cn/uc/wap/login/check',
       method: 'POST',
@@ -139,7 +139,7 @@ Page({
           },
           data: submitData,
           success(res) {
-            console.log(res);
+            // console.log(res);
             if (res.data.e === 0) {
               wx.showToast({
                 title: '疫情通打卡成功!',
