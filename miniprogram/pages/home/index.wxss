@@ -14,7 +14,7 @@
   color: gray;
   font-size: 10px;
   text-align: center;
-  width: 300px;
+  width: 80vw;
   margin: 0 auto;
 }
 
