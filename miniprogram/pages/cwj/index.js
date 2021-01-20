@@ -43,7 +43,8 @@ Page({
     canSignIn: false,
     isAtSchool: false,
     username: '',
-    password: ''
+    password: '',
+    showSubmitting: false,
   },
 
   onShow: function () {
@@ -56,10 +57,14 @@ Page({
   },
 
   signInCWJ() {
+    const that = this;
     const submitData = {};
     Object.assign(submitData, cwjData, this.data.isAtSchool ? app.globalData.commonDataAtSchool : app.globalData.commonDataAtHome);
     // console.log(this.data.isAtSchool);
-    // console.log(submitData);
+    console.log(submitData);
+    this.setData({
+      showSubmitting: true
+    });
     wx.request({
       url: 'https://xxcapp.xidian.edu.cn/uc/wap/login/check',
       method: 'POST',
@@ -77,6 +82,9 @@ Page({
             title: res.data.m,
             icon: 'none'
           });
+          that.setData({
+            showSubmitting: false
+          });
           return;
         }
         wx.request({
@@ -89,6 +97,9 @@ Page({
           data: submitData,
           success(res) {
             // console.log(res);
+            that.setData({
+              showSubmitting: false
+            });
             if (res.data.e === 0) {
               wx.showToast({
                 title: '晨午检打卡成功!',
@@ -107,10 +118,14 @@ Page({
   },
 
   signInYQT() {
+    const that = this;
     const submitData = {};
     Object.assign(submitData, yqtData, this.data.isAtSchool ? app.globalData.commonDataAtSchool : app.globalData.commonDataAtHome);
     // console.log(this.data.isAtSchool);
-    // console.log(submitData);
+    console.log(submitData);
+    this.setData({
+      showSubmitting: true
+    });
     wx.request({
       url: 'https://xxcapp.xidian.edu.cn/uc/wap/login/check',
       method: 'POST',
@@ -128,6 +143,9 @@ Page({
             title: res.data.m,
             icon: 'none'
           });
+          that.setData({
+            showSubmitting: false
+          });
           return;
         }
         wx.request({
@@ -140,6 +158,9 @@ Page({
           data: submitData,
           success(res) {
             // console.log(res);
+            that.setData({
+              showSubmitting: false
+            });
             if (res.data.e === 0) {
               wx.showToast({
                 title: '疫情通打卡成功!',

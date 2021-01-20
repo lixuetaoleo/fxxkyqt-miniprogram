@@ -1,4 +1,5 @@
 <view class="button-container">
   <button disabled="{{!canSignIn}}" bindtap="signInCWJ" class="CWJ">晨午检一键打卡</button>
+  <mp-loading type="circle" show="{{showSubmitting}}" tips="打卡中"></mp-loading>
   <button disabled="{{!canSignIn}}" bindtap="signInYQT">疫情通一键打卡</button>
 </view>
