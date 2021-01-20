@@ -60,7 +60,7 @@ Page({
         icon: 'none',
         title: '账号密码不能为空, 请检查输入'
       })
-      return;
+      // return;
     }
     Promise.all([wx.setStorage({
       data: this.data.inputAccount,
@@ -72,7 +72,7 @@ Page({
       this.setData({
         username: this.data.inputAccount,
         password: this.data.inputPassword,
-        isShowInput: false,
+        isShowInput: this.data.inputAccount.length === 0 ? true : false,
       })
     });
     console.log(this.data.inputAccount, this.data.inputPassword);

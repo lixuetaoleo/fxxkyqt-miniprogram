@@ -1,3 +1,4 @@
 <view>
-  <button disabled="{{!canSignIn}}" bindtap="testdaka">晨午检一键打卡</button>
+  <button disabled="{{!canSignIn}}" bindtap="signInCWJ">晨午检一键打卡</button>
+  <button disabled="{{!canSignIn}}" bindtap="signInYQT">疫情通一键打卡</button>
 </view>

@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/yqt/index",
     "pages/cwj/index"
   ],
   "window": {
@@ -13,15 +12,11 @@
   },
   "tabBar": {
     "list": [{
-        "text": "个人中心",
+        "text": "信息配置",
         "pagePath": "pages/home/index"
       },
       {
-        "text": "疫情通",
-        "pagePath": "pages/yqt/index"
-      },
-      {
-        "text": "晨午检",
+        "text": "打卡中心",
         "pagePath": "pages/cwj/index"
       }
     ]
