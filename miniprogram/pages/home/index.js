@@ -94,21 +94,7 @@ Page({
       isAtSchool: isAtSchool
     });
   },
-
-  handleSetHomeAddress(e) {
-    // wx.getSetting({
-    //   success(res) {
-    //     if (!res.authSetting['scope.record']) {
-    //       wx.authorize({
-    //         scope: 'scope.record',
-    //         success () {
-    //           // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-    //           wx.startRecord()
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
+  setLocation() {
     wx.chooseLocation().then((res, err) => {
       // console.log(res);
       const splittedAddress = splitAddressString(res.address);
@@ -141,6 +127,24 @@ Page({
           // console.log(this.data.homeAddress)
         });
       });
+    });
+  },
+
+  handleSetHomeAddress(e) {
+    const that = this;
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              that.setLocation();
+            }
+          })
+        } else {
+          that.setLocation();
+        }
+      }
     });
   },
 

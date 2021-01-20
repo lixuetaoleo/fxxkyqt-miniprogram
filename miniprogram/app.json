@@ -26,6 +26,11 @@
   "useExtendedLib": {
     "weui": true
   },
-  "darkmode": true
+  "darkmode": true,
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于一键打卡功能"
+    }
+  }
 
 }
