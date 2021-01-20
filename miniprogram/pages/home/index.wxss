@@ -1,2 +1,31 @@
 /* pages/home/index.wxss */
 @import "../../app.wxss";
+.container {
+  width: 100%;
+}
+
+.index-block {
+  margin-top: 60rpx;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  color: gray;
+  font-size: 10px;
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.set-address-button {
+  margin-top: 20rpx;
+}
+
+.home-address {
+  font-weight: bold;
+}
+
+.home-address-container {
+  margin-top: 60rpx;
+}

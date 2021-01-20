@@ -1,10 +1,10 @@
 <!--index.wxml-->
-<view>
-  <view>
+<view class="container">
+  <view class="index-block">
     <view wx:if="{{isShowInput}}">
       <input type="text" bindinput="handleAccountInput" placeholder="学号/工号" value="{{inputAccount}}" />
       <input type="text" password bindinput="handlePasswordInput" placeholder="密码" value="{{inputPassword}}" />
-      <button class="weui-btn weui-btn_primary" bindtap="handleSaveUserInfo">保存信息</button>
+      <button bindtap="handleSaveUserInfo">保存信息</button>
     </view>
     <view wx:else>
       <text>当前登录账号为:</text>
@@ -14,8 +14,8 @@
       <button bindtap="handleChangeAccount">切换账号</button>
     </view>
   </view>
-  <view>
-    <text>你想在哪里打卡</text>
+  <view class="index-block">
+    <text>你想在哪里打卡:</text>
     <view>
       <radio-group bindchange="handleAddrChange">
         <radio value="school" checked="{{isAtSchool === true ? true : ''}}">
@@ -23,19 +23,17 @@
         </radio>
         <radio value="home" checked="{{isAtSchool === false ? true : ''}}">家里</radio>
       </radio-group>
-      <button wx:if="{{isAtSchool === false}}" bindtap="handleSetHomeAddress"
-        class="weui-btn weui-btn_primary">设置地址</button>
-      <view wx:if="{{isAtSchool === false}}">
-        你设置的家庭地址为:
-        {{completedAddress}}
+    </view>
+    <view wx:if="{{isAtSchool === false}}">
+      <button  bindtap="handleSetHomeAddress" class="set-address-button">设置地址</button>
+      <view class="home-address-container">
+        设置的家庭地址为:
+        <text class="home-address">{{completedAddress}}</text>
         (如果地址为空, 请重新获取地址)</view>
-      <text>
-        疫情通和晨午检都将按照此地址进行打卡
-      </text>
     </view>
   </view>
-  <view>
-    <button bindtap="handleShowImportantInfo">
+  <view class="index-block">
+    <button bindtap="handleShowImportantInfo" class="weui-btn weui-btn_primary">
       重要说明
     </button>
     <mp-dialog title="重要说明" show="{{showImportantInfo}}" buttons="{{oneButton}}" bindbuttontap="handleDiglogIKnow">
@@ -45,5 +43,8 @@
       <text>3. 健康码颜色非绿</text>
       <text>4. 其他任何需要如实上报的信息</text>
     </mp-dialog>
+  </view>
+  <view class="footer">
+    本程序不会获取(上传)你的任何敏感信息，所有数据均在本地保存
   </view>
 </view>
