@@ -61,7 +61,7 @@ Page({
     const submitData = {};
     Object.assign(submitData, cwjData, this.data.isAtSchool ? app.globalData.commonDataAtSchool : app.globalData.commonDataAtHome);
     // console.log(this.data.isAtSchool);
-    console.log(submitData);
+    // console.log(submitData);
     this.setData({
       showSubmitting: true
     });
@@ -122,7 +122,7 @@ Page({
     const submitData = {};
     Object.assign(submitData, yqtData, this.data.isAtSchool ? app.globalData.commonDataAtSchool : app.globalData.commonDataAtHome);
     // console.log(this.data.isAtSchool);
-    console.log(submitData);
+    // console.log(submitData);
     this.setData({
       showSubmitting: true
     });
