@@ -2,7 +2,6 @@
 @import "../../app.wxss";
 
 page {
-  background: #f6f6f6;
   height: 100vh;
 }
 
