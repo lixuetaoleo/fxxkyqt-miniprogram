@@ -40,6 +40,13 @@ Page({
 
   },
 
+  onShareAppMessage(res) {
+    return {
+      title: '疫情通打卡助手',
+      path: '/pages/index/index',
+    };
+  },
+
   handleAccountInput(e) {
     // console.log(e.detail.value);
     this.setData({
