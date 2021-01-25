@@ -43,7 +43,7 @@ Page({
   onShareAppMessage(res) {
     return {
       title: '疫情通打卡助手',
-      path: '/pages/index/index',
+      path: '/pages/home/index',
     };
   },
 
